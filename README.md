@@ -11,6 +11,7 @@ N/A
 ## Usage
 
 To use, open the webpage in the browser. The header should display the program title, a short description, and the current day and date. The current hour will be highlighted in gray, the past hours will be red, and future hours will be green. Type your schedule to-dos in the textbox corresponding to the hour and hit the save button on the right side of the box to save the submission.
+https://kiman21.github.io/work-day-scheduler/
 
 ![plot](./screenshot1.png)
 
