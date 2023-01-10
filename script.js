@@ -1,23 +1,46 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// Variables set to attributes set in the HTML
+var currentDay = $("#currentDay");
+var saveButton = $(".saveBtn");
+var hourNumber = [
+  $("#hour-9"),
+  $("#hour-10"),
+  $("#hour-11"),
+  $("#hour-12"),
+  $("#hour-13"),
+  $("#hour-14"),
+  $("#hour-15"),
+  $("#hour-16"),
+  $("#hour-17"),
+];
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+  // Variable set to the current hour
+  var timeNow = dayjs().format("h");
+// For each item in the hourNumber array, an if statement compares the current hour to the hour of each text box. If they are equal, the "present" class is added. If the hour of the text box is greater than the current hour, the "future" class is added. For all other cases the "past" class is added.
+ for (var i=0; i<hourNumber.length; i++) {
+  if (timeNow == hourNumber.length + 9) {
+    hourNumber[i].attr("class", "present");
+  } else if (timeNow < hourNumber.length + 9) {
+    hourNumber[i].attr("class", "future");
+  } else {
+    hourNumber[i].attr("class", "past");
+  }
+ };
+//  This function prints the current date and day to the header of the page.
+  var rightNow = dayjs();
+  currentDay.text(rightNow.format("dddd, MMM D, YYYY"));
+  // An event listener that starts the following function when the save button is clicked.
+  saveButton.on("click", function(event) {
+    // Prevents default browser behavior.
+    event.preventDefault();
+    // Saves text to local storage and if the text box is blank, load saved text from local storage to the text area.
+    for (var i=0; i<hourNumber.length; i++) {
+      var textBox = hourNumber[i].children("textarea").value;
+      localStorage.setItem("textBox");
+      if (textBox.value = "") {
+        textBox.text(localStorage.getitem("textBox"));
+      };
+    };
+
+  });
+
 });
